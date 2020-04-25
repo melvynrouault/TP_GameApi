@@ -1,0 +1,47 @@
+$width: 300px;
+
+section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+article {
+  width: $width;
+  margin: 5px;
+  border: 1px solid silver;
+
+  header {
+    display: flex;
+    align-items: center;
+
+    .spacer {
+      flex: 1;
+    }
+
+    &+img {
+      width: $width;
+    }
+  }
+
+  &:hover { border: 1px solid blue; }
+
+  footer { margin-top: 10px; }
+}
+.paginationControls{
+  text-align: center;
+}
+
+#delete {
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  padding:6px 0 6px 0;
+	font:Bold 13px Arial;
+	background:#d34836;
+	color:#fff;
+	width:90px;
+	border-radius:2px;
+	border:none;
+}

@@ -1,0 +1,53 @@
+<h1>Jeux disponibles</h1>
+
+  <ng-template #loading>
+    <p>Waiting...</p>
+  </ng-template>
+    
+  <app-game-list-filter (filter)="onFilter($event)"></app-game-list-filter>
+  
+  <div>
+    <button (click)="sizeDown()">-</button>
+    <button (click)="sizeUp()">+</button>
+    <button (click)="sizeReset()">100%</button>
+  </div>
+  
+  <section *ngIf="filteredEntities; else loading">
+    <article *ngFor="let game of filteredEntities | paginate: {id: 'listing_pagination', itemsPerPage: 50, currentPage: page, totalItems: totalRecords}" [ngStyle]="{'width': width + 'px'}">
+      <header>
+        <img src="http://fakeimg.pl/50" alt="editor">
+        <div>
+          <h1>{{ game.title }}</h1>
+          
+          <p *ngFor="let genre of game.genres">{{ genre.name }}</p>
+        </div>
+        <div class="spacer"></div>
+        <p>{{ game.note }}/10</p>
+      </header>
+      
+      <img [src]="game.coverImage" alt="game logo">
+      
+      <main>
+        {{ truncate(game.description) }}
+      </main>
+      
+      <footer>
+        <button
+          type="button"
+          (click)="delete(game.id)"
+          id="delete">
+          supprimer
+        </button>
+      </footer>
+
+      <!-- <footer>
+        <app-game-actions
+        (click)="onActionClick($event, game)">
+      </app-game-actions>
+    </footer> -->
+
+  </article>
+</section>
+<div class="paginationControls">
+  <pagination-controls id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="page = $event"></pagination-controls>
+</div>
